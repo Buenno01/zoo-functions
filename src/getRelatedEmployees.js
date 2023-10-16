@@ -16,7 +16,19 @@ const isManager = (id) => {
 };
 
 const getRelatedEmployees = (managerId) => {
-  // seu código aqui
+  if (!isManager(managerId)) {
+    throw new Error('O id inserido não é de uma pessoa colaboradora gerente!');
+  }
+
+  const { employees } = data;
+  const managedPeople = [];
+  employees.forEach((person) => {
+    if (person.managers.find((manager) => manager === managerId)) {
+      managedPeople.push(person.firstName + ' ' + person.lastName);
+    }
+  });
+
+  return managedPeople;
 };
 
 module.exports = { isManager, getRelatedEmployees };
