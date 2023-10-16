@@ -28,10 +28,21 @@ function getGeneralCoverage() {
 
 const getEmployeesCoverage = (object) => {
   const generalCoverage = getGeneralCoverage();
+  let specificEmployee;
 
   if (!object) {
     return generalCoverage;
   }
+  if (object.name) {
+    specificEmployee = generalCoverage.find((person) => person.fullName.includes(object.name));
+  }
+  if (object.id) {
+    specificEmployee = generalCoverage.find((person) => person.id === object.id);
+  }
+  if (!specificEmployee) {
+    throw new Error('Informações inválidas');
+  }
+  return specificEmployee;
 };
 
 module.exports = getEmployeesCoverage;
