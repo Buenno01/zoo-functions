@@ -8,13 +8,13 @@ const countEntrants = (entrants) => {
   };
 
   entrants.forEach((person) => {
-    const ageClassification = person.age < 18
-      ? 'child'
-      : person.age >= 50
-        ? 'senior'
-        : 'adult';
-
-      count[ageClassification] += 1;
+    if (person.age >= 50) {
+      count.senior += 1;
+    } else if (person.age < 18) {
+      count.child += 1;
+    } else {
+      count.adult += 1;
+    }
   });
 
   return count;
