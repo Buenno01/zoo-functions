@@ -6,9 +6,9 @@ const isManager = (id) => {
 
   const actualEmployee = employees.find((person) => person.id === id);
 
-  const managers = actualEmployee.managers;
+  const { managers } = actualEmployee;
 
-  if (managers.length == 0 || managers[0] == stephanieId) {
+  if (managers.length === 0 || managers[0] === stephanieId) {
     return true;
   }
 
@@ -24,7 +24,7 @@ const getRelatedEmployees = (managerId) => {
   const managedPeople = [];
   employees.forEach((person) => {
     if (person.managers.find((manager) => manager === managerId)) {
-      managedPeople.push(person.firstName + ' ' + person.lastName);
+      managedPeople.push(`${person.firstName} ${person.lastName}`);
     }
   });
 
