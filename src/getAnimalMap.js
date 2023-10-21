@@ -2,16 +2,6 @@ const data = require('../data/zoo_data');
 
 const { species } = data;
 
-function getSpeciesLocation() {
-  const map = getRegions();
-
-  species.forEach((animal) => {
-    map[animal.location] = [...map[animal.location], animal.name];
-  });
-
-  return map;
-}
-
 function getRegions() {
   const regions = {};
 
@@ -20,6 +10,16 @@ function getRegions() {
   });
 
   return regions;
+}
+
+function getSpeciesLocation() {
+  const map = getRegions();
+
+  species.forEach((animal) => {
+    map[animal.location] = [...map[animal.location], animal.name];
+  });
+
+  return map;
 }
 
 function getAnimalsNames(sort) {

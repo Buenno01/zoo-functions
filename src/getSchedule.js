@@ -3,9 +3,9 @@ const data = require('../data/zoo_data');
 const { hours } = data;
 const arrDays = Object.keys(hours).map((day) => {
   const { open, close } = hours[day];
-  if (hours[day].open === 0 && hours[day].close === 0) return { day: day, officeHour: 'CLOSED' };
+  if (hours[day].open === 0 && hours[day].close === 0) return { day, officeHour: 'CLOSED' };
 
-  return { day: day, officeHour: `Open from ${open}am until ${close}pm` };
+  return { day, officeHour: `Open from ${open}am until ${close}pm` };
 });
 
 const getGeneralSchedule = (species) => {
