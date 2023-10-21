@@ -1,6 +1,6 @@
 const data = require('../data/zoo_data');
 
-const { hours } = data;
+const { hours, species } = data;
 const arrDays = Object.keys(hours).map((day) => {
   const { open, close } = hours[day];
   if (hours[day].open === 0 && hours[day].close === 0) return { day, officeHour: 'CLOSED' };
@@ -8,7 +8,7 @@ const arrDays = Object.keys(hours).map((day) => {
   return { day, officeHour: `Open from ${open}am until ${close}pm` };
 });
 
-const getGeneralSchedule = (species) => {
+const getGeneralSchedule = () => {
   const generalSchedule = {};
 
   arrDays.forEach((el) => {
@@ -31,7 +31,6 @@ const getGeneralSchedule = (species) => {
 };
 
 const getSchedule = (scheduleTarget) => {
-  const { species } = data;
   const specificAnimal = species.find((element) => element.name === scheduleTarget);
 
   if (specificAnimal) {
@@ -42,11 +41,11 @@ const getSchedule = (scheduleTarget) => {
 
   if (daysOfTheWeek.includes(scheduleTarget)) {
     const temporaryObj = {};
-    temporaryObj[scheduleTarget] = getGeneralSchedule(species)[scheduleTarget];
+    temporaryObj[scheduleTarget] = getGeneralSchedule()[scheduleTarget];
     return temporaryObj;
   }
 
-  return getGeneralSchedule(species);
+  return getGeneralSchedule();
 };
 
 module.exports = getSchedule;
