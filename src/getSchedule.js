@@ -1,41 +1,18 @@
 const data = require('../data/zoo_data');
 
-const arrDays = [
-  {
-    day: 'Monday',
-    officeHour: 'CLOSED',
-  },
-  {
-    day: 'Tuesday',
-    officeHour: 'Open from 8am until 6pm',
-  },
-  {
-    day: 'Wednesday',
-    officeHour: 'Open from 8am until 6pm',
-  },
-  {
-    day: 'Thursday',
-    officeHour: 'Open from 10am until 8pm',
-  },
-  {
-    day: 'Friday',
-    officeHour: 'Open from 10am until 8pm',
-  },
-  {
-    day: 'Saturday',
-    officeHour: 'Open from 8am until 10pm',
-  },
-  {
-    day: 'Sunday',
-    officeHour: 'Open from 8am until 8pm',
-  },
-];
+const { hours } = data;
+const arrDays = Object.keys(hours).map((day) => {
+  const { open, close } = hours[day];
+  if (hours[day].open === 0 && hours[day].close === 0) return { day: day, officeHour: 'CLOSED' };
+
+  return { day: day, officeHour: `Open from ${open}am until ${close}pm` };
+});
 
 const getGeneralSchedule = (species) => {
   const generalSchedule = {};
 
   arrDays.forEach((el) => {
-    const exhibition = el.day === 'Monday'
+    const exhibition = el.officeHour === 'CLOSED'
       ? 'The zoo will be closed!'
       : [];
     generalSchedule[el.day] = {

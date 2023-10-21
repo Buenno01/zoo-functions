@@ -7,7 +7,7 @@ const getEmployeeByName = (name) => {
     return {};
   }
 
-  return (employees.find((employee) => employee.firstName === name || employee.lastName === name));
+  return (employees.find((employee) => [employee.firstName, employee.lastName].includes(name)));
 };
 
 module.exports = getEmployeeByName;

@@ -3,7 +3,7 @@ const data = require('../data/zoo_data');
 const { species } = data;
 
 function getSpeciesLocation() {
-  const map = { NW: [], NE: [], SW: [], SE: [] };
+  const map = getRegions();
 
   species.forEach((animal) => {
     map[animal.location] = [...map[animal.location], animal.name];
@@ -12,8 +12,18 @@ function getSpeciesLocation() {
   return map;
 }
 
+function getRegions() {
+  const regions = {};
+
+  species.forEach((animal) => {
+    regions[animal.location] = [];
+  });
+
+  return regions;
+}
+
 function getAnimalsNames(sort) {
-  const map = { NW: [], NE: [], SW: [], SE: [] };
+  const map = getRegions();
 
   species.forEach((animal) => {
     const animalObject = {};
@@ -30,7 +40,7 @@ function getAnimalsNames(sort) {
 }
 
 function getAnimalsBySex(sex, sort) {
-  const map = { NW: [], NE: [], SW: [], SE: [] };
+  const map = getRegions();
 
   species.forEach((animal) => {
     const animalObject = {};
